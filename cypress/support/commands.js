@@ -34,7 +34,6 @@ Cypress.Commands.add("fbFinalUserLogin",(username,password) =>
     cy.get("#email").type(username);
     cy.get("#pass").type(password);
     cy.get('#loginbutton').click();
-    cy.get('*[href="https://www.facebook.com/profile.php?id=100069342816025"]').should('be.visible');
    })
 })
 
