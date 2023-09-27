@@ -1,3 +1,5 @@
+import FacebookPage from "../pages/FacebookPage";
+
 Cypress.on("uncaught:exception", (err, runnable) => {
   // returning false here prevents Cypress from
   // failing the test
@@ -6,30 +8,21 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 
 describe("Entrante messenger", () => {
 
-
+  let paginaDeFacebook
   before(() => {
-    cy.fbFinalUserLogin('qayzn76@gmail.com','asdQWE!23');
-    cy.visit('https://www.facebook.com/messages/t')
-    cy.contains("Volver a cargar página").click();
-    cy.contains("Itchy and Scratchy's").click();
+   paginaDeFacebook = new FacebookPage('qayzn76@gmail.com','asdQWE!23')
   })
 
-  // beforeEach(() => {
-  //   //si esto no termino de loguear
-  //    cy.fbFinalUserLogin('qayzn76@gmail.com','asdQWE!23');
+  beforeEach(() => {
+    paginaDeFacebook.login();
+    paginaDeFacebook.openConversation("Itchy and Scratchy's")
+    });
 
-
-  //    });
-
-  it("sendMensaje", () => {
-    for(let i = 0 ; i< 50; i++){
-      const input = cy.get('.xmjcpbm > .x1a02dak');
-      for (let i = 0; i < 15; i++){
-        input.type(Date.now()+'{enter}');
-      }
-      input.type('dyc{enter}')
-      cy.wait(10000)
+  it("sendMensaje",() => {
+    for (let i = 0; i < 15; i++){
+      paginaDeFacebook.sendMessage("prueba123")
     }
+    cy.wait(10000);
   });
 
 });

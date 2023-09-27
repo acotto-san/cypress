@@ -8,6 +8,7 @@ module.exports = defineConfig({
     experimentalStudio:true,
 
   },
+  retries:2,
   chromeWebSecurity: false,
   env: {
     facebookSocialLoginUsername:"qayzn76@gmail.com",
